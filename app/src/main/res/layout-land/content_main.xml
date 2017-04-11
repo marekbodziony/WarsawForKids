@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="marekbodziony.warsawforkids.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <ImageButton
+                    android:id="@+id/events_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="2dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/events_btn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Events"
+                    app:layout_constraintLeft_toLeftOf="@+id/events_btn"
+                    app:layout_constraintRight_toRightOf="@+id/events_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/events_btn" />
+
+                <ImageButton
+                    android:id="@+id/attractions_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    app:layout_constraintRight_toLeftOf="@+id/places_btn"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintLeft_toRightOf="@+id/events_btn"
+                    android:layout_marginLeft="8dp" />
+
+                <TextView
+                    android:id="@+id/attractions_btn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Attractions"
+                    app:layout_constraintLeft_toLeftOf="@+id/attractions_btn"
+                    app:layout_constraintRight_toRightOf="@+id/attractions_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/attractions_btn" />
+
+                <ImageButton
+                    android:id="@+id/places_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:onClick="showPlaces"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <ImageButton
+                    android:id="@+id/parks_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/events_btn_txt"
+                    app:srcCompat="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/places_btn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Places"
+                    app:layout_constraintLeft_toLeftOf="@+id/places_btn"
+                    app:layout_constraintRight_toRightOf="@+id/places_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/places_btn" />
+
+                <TextView
+                    android:id="@+id/parks_btn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Parks"
+                    app:layout_constraintHorizontal_bias="0.505"
+                    app:layout_constraintLeft_toLeftOf="@+id/parks_btn"
+                    app:layout_constraintRight_toRightOf="@+id/parks_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/parks_btn" />
+
+                <ImageButton
+                    android:id="@+id/playgrounds_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    app:layout_constraintRight_toLeftOf="@+id/restaurants_btn"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintLeft_toRightOf="@+id/parks_btn"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/attractions_btn_txt"
+                    app:layout_constraintHorizontal_bias="0.497" />
+
+                <ImageButton
+                    android:id="@+id/restaurants_btn"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="16dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/places_btn_txt" />
+
+                <TextView
+                    android:id="@+id/playgrounds_btn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Playgrounds"
+                    app:layout_constraintLeft_toLeftOf="@+id/playgrounds_btn"
+                    app:layout_constraintRight_toRightOf="@+id/playgrounds_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/playgrounds_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/restaurants_btn_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restaurants"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintTop_toBottomOf="@+id/restaurants_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/restaurants_btn"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintRight_toRightOf="@+id/restaurants_btn"
+                    app:layout_constraintHorizontal_bias="0.517"
+                    app:layout_constraintVertical_bias="0.0" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

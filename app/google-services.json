@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "876908756521",
+    "firebase_url": "https://warsawforkids.firebaseio.com",
+    "project_id": "warsawforkids",
+    "storage_bucket": "warsawforkids.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876908756521:android:5ab5e6d29dcfca14",
+        "android_client_info": {
+          "package_name": "marekbodziony.warsawforkids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876908756521-9q9h0fqkhevja98uth3k10bm61u65d18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "marekbodziony.warsawforkids",
+            "certificate_hash": "71e5ba499783660662202ad42279408ec5d19615"
+          }
+        },
+        {
+          "client_id": "876908756521-sf5561a725c2r30ugb6nuu56jo3aftpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZDgtlqpVLPTK6KAGT0-uiE7nPLNqf4vI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876908756521-sf5561a725c2r30ugb6nuu56jo3aftpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
