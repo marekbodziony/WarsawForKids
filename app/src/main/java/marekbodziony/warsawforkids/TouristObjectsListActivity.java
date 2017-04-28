@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -28,28 +31,30 @@ public class TouristObjectsListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TouristObjectAdapter adapter;
-    List<TouristObject> touristObjectList;
+    private List<TouristObject> touristObjectList;
 
-    boolean readFromFirebase = true;
+    private DatabaseReference firebaseRef;
 
-    DatabaseReference firebaseRef;
+    private TextView emptyListText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tourist_objects_list);
 
+        emptyListText = (TextView) findViewById(R.id.tourist_object_list_empty_txt);
+
         firebaseRef = FirebaseDatabase.getInstance().getReference();
         touristObjectList = new ArrayList<>();
 
-        // get data from Firebase
-        getTouristObjectListFromFirebase();
+        getTouristObjectListFromFirebase();     // get data from Firebase and populate touristObjectList
 
         recyclerView = (RecyclerView) findViewById(R.id.tourist_object_list_recyclerView);
         recyclerView.setHasFixedSize(true);     //  for better performance
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TouristObjectAdapter(this,touristObjectList);
         recyclerView.setAdapter(adapter);
+
     }
 
     // get data from Firebase
@@ -60,11 +65,12 @@ public class TouristObjectsListActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-                TouristObject t = getTouristObjectFromDataSnapsot(dataSnapshot, type);
+                TouristObject t = dataSnapshot.getValue(TouristObject.class);
                 touristObjectList.add(t);
 
                 adapter.notifyDataSetChanged();     // refresh view when there is new data
                 Log.i("W4K","onChildAdded() => " + dataSnapshot);
+                emptyListText.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -72,15 +78,18 @@ public class TouristObjectsListActivity extends AppCompatActivity {
                 String data = dataSnapshot.getValue().toString();
                 Log.i("W4K","onChildChanged() => " + data);
 
-                TouristObject t = getTouristObjectFromDataSnapsot(dataSnapshot, type);
-                touristObjectList.remove(Integer.parseInt(dataSnapshot.getKey())-1);
-                touristObjectList.add(t);
+                int id = Integer.parseInt(dataSnapshot.getKey())-1;
+                TouristObject oldTouristObj = touristObjectList.get(id);
+                TouristObject newTouristObj = dataSnapshot.getValue(TouristObject.class);
+                oldTouristObj.updateTouristObjectWithNewData(newTouristObj);
+
                 adapter.notifyDataSetChanged();     // refresh view when there is new data update
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 touristObjectList.remove(Integer.parseInt(dataSnapshot.getKey())-1);
+                if (touristObjectList.size() == 0) emptyListText.setVisibility(View.VISIBLE);      // show "No data to show" text when list is empty
                 adapter.notifyDataSetChanged();     // refresh view when there was item removed
             }
 
@@ -93,34 +102,4 @@ public class TouristObjectsListActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    private TouristObject getTouristObjectFromDataSnapsot(DataSnapshot dataSnapshot, TouristObjectType type){
-
-        Map touristItem = (HashMap)dataSnapshot.getValue();
-        String name = "", description = "", www = "";
-        Float gpsLat = 0.0f, gpsLon = 0.0f, rating = 0.0f;
-        Long likes = 0L;
-
-        if (touristItem.get("name")                 != null) name = (String)touristItem.get("name");
-        if (touristItem.get("description") != null) description = (String)touristItem.get("description");
-        if (touristItem.get("gpsLat") != null )     gpsLat = Float.parseFloat(""+touristItem.get("gpsLat"));
-        if (touristItem.get("gpsLon") != null)      gpsLon = Float.parseFloat(""+touristItem.get("gpsLon"));
-        if (touristItem.get("rating") != null)      rating = Float.parseFloat(""+touristItem.get("rating"));
-        if (touristItem.get("likes") != null)       likes = (long)touristItem.get("likes");
-
-
-//                Log.i("W4K","\nNew child added to Firebase:\n" + touristItem.toString());
-//                Log.i("W4K","Name = " + name + "(" + name.getClass() + ")");
-//                Log.i("W4K","Description = " + description + "(" + description.getClass() + ")");
-//                Log.i("W4K","www = " + www + "(" + www.getClass() + ")");
-//                Log.i("W4K","gpsLat = " + gpsLat + "(" + gpsLat.getClass() + ")");;
-//                Log.i("W4K","gpsLon = " + gpsLon + "(" + gpsLon.getClass() + ")");
-//                Log.i("W4K","rating = " + rating + "(" + rating.getClass() + ")");
-//                Log.i("W4K","likes = " + likes + "(" + likes.getClass() + ")");
-
-        TouristObject t = new TouristObject(type,name,new GregorianCalendar(),description,www,gpsLat,gpsLat,rating,likes);
-
-        return t;
-    };
 }

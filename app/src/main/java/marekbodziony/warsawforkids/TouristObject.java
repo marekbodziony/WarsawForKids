@@ -2,17 +2,18 @@ package marekbodziony.warsawforkids;
 
 import android.widget.ImageView;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
  * Created by MBodziony on 2017-04-25.
  */
 
-public class TouristObject {
+public class TouristObject implements Serializable {
 
     private TouristObjectType type;
     private String name;
-    private GregorianCalendar eventDate;      // needed only for EVENT types
+    private long date;      // date in milisecond, needed only for EVENT types
     private String description;
     private String www;
     private float gpsLat;
@@ -25,11 +26,11 @@ public class TouristObject {
     public TouristObject(){}
 
     // constructor
-    public TouristObject(TouristObjectType type, String name, GregorianCalendar eventDate, String description, String www, float gpsLat,
+    public TouristObject(TouristObjectType type, String name, long date, String description, String www, float gpsLat,
                          float gpsLon, float rating, long likes){
         this.type = type;
         this.name = name;
-        this.eventDate = eventDate;
+        this.date = date;
         this.description = description;
         this.www = www;
         this.gpsLat = gpsLat;
@@ -55,12 +56,12 @@ public class TouristObject {
         this.name = name;
     }
 
-    public GregorianCalendar getEventDate() {
-        return eventDate;
+    public long getDate() {
+        return date;
     }
 
-    public void setEventDate(GregorianCalendar eventDate) {
-        this.eventDate = eventDate;
+    public void setDate(long date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -116,5 +117,18 @@ public class TouristObject {
     }
     public void setImgs(ImageView img){
         this.img = img;
+    }
+
+    // update TouristObject data with new values form other TouristObject
+    public void updateTouristObjectWithNewData(TouristObject newTouristObject){
+
+        this.name = newTouristObject.getName();
+        this.date = newTouristObject.getDate();
+        this.description = newTouristObject.getDescription();
+        this.www = newTouristObject.getWww();
+        this.gpsLat = newTouristObject.getGpsLat();
+        this.gpsLon = newTouristObject.getGpsLon();
+        this.rating = newTouristObject.getRating();
+        this.likes = newTouristObject.getLikes();
     }
 }
